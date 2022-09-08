@@ -16,7 +16,7 @@ setup(
         'singer-encodings==0.1.1',
         'terminaltables==3.1.0',
         'bcrypt==3.1.7',
-        'cryptography==2.7'
+        'cryptography==2.5'
     ],
     extras_require={
         'dev': [
