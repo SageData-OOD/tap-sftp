@@ -15,6 +15,7 @@ setup(
         'backoff==1.8.0',
         'singer-encodings==0.1.1',
         'terminaltables==3.1.0',
+        'bcrypt==3.1.7'
     ],
     extras_require={
         'dev': [
