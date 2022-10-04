@@ -1,4 +1,6 @@
 import json
+import sys
+
 import singer
 
 from singer import metadata
