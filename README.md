@@ -1,6 +1,6 @@
 # tap-sftp
-
+Supported Protocols: [SFTP, FTPS]
 
 ---
 
-Copyright &copy; 2019 Stitch
+Copyright &copy; 2022 sageData

@@ -1,5 +1,4 @@
 import json
-import sys
 import singer
 
 from singer import metadata
@@ -9,8 +8,9 @@ from tap_sftp.sync import sync_stream
 from tap_sftp.stats import STATS
 from terminaltables import AsciiTable
 
-REQUIRED_CONFIG_KEYS = ["username", "port", "private_key_file", "host"]
+REQUIRED_CONFIG_KEYS = ["username", "port", "private_key_file", "host", "protocol"]
 LOGGER = singer.get_logger()
+
 
 def do_discover(config):
     LOGGER.info("Starting discover")
@@ -23,6 +23,7 @@ def do_discover(config):
 
 def stream_is_selected(mdata):
     return mdata.get((), {}).get('selected', False)
+
 
 def do_sync(config, catalog, state):
     LOGGER.info('Starting sync.')
@@ -78,6 +79,7 @@ def main():
         do_discover(args.config)
     elif args.catalog or args.properties:
         do_sync(args.config, args.catalog, args.state)
+
 
 if __name__ == '__main__':
     main()
