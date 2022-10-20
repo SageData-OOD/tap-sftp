@@ -304,7 +304,7 @@ class FTPSConnection:
                 ret = line.split()
                 filename= ret[3]
                 fact = {"size": ret[3],
-                        "modify": dateutil.parser.parse(f"{ret[0]} {ret[1]}")}
+                        "modify": dateutil.parser.parse(f"{ret[0]} {ret[1]}").replace(tzinfo=pytz.UTC)}
                 result.append((filename,fact)) 
 
             self.ftps.retrlines("LIST", parse_list)
@@ -328,7 +328,7 @@ class FTPSConnection:
             if last_modified is None:
                 LOGGER.warning("Cannot read m_time for file %s, defaulting to current epoch time",
                                 os.path.join(prefix, filename))
-                last_modified = datetime.utcnow()
+                last_modified = datetime.utcnow().replace(tzinfo=pytz.UTC)
 
             # NB: SFTP specifies path characters to be '/'
             #     https://tools.ietf.org/html/draft-ietf-secsh-filexfer-13#section-6
