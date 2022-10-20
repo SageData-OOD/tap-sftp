@@ -5,7 +5,7 @@ import singer
 from singer import metadata, utils, Transformer
 from tap_sftp import client
 from tap_sftp import stats
-from singer_encodings import csv
+from .singer_encodings import csv
 
 LOGGER = singer.get_logger()
 
