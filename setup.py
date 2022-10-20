@@ -17,7 +17,7 @@ setup(
         'terminaltables==3.1.0',
         'bcrypt==3.1.7',
         'cryptography==2.5',
-        'dateutil'
+        'python-dateutil'
     ],
     extras_require={
         'dev': [
