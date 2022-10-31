@@ -79,9 +79,13 @@ def sync_file(conn, f, stream, table_spec):
                 }
                 rec = {**row, **custom_columns}
 
-                to_write = transformer.transform(rec, stream.schema.to_dict(), metadata.to_map(stream.metadata))
+                # DP: this could be a monumental mistake, but that works for Bikmo
+                singer.write_record(stream.tap_stream_id, rec)
 
-                singer.write_record(stream.tap_stream_id, to_write)
+                # DP: below doesn't work for some reason
+                # to_write = transformer.transform(rec, stream.schema.to_dict(), metadata.to_map(stream.metadata))
+                # singer.write_record(stream.tap_stream_id, to_write)
+
                 records_synced += 1
 
     stats.add_file_data(table_spec, f['filepath'], f['last_modified'], records_synced)

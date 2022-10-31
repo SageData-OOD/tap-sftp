@@ -165,7 +165,8 @@ class SFTPConnection():
 
         for f in matching_files:
             LOGGER.info("Found file: %s", f['filepath'])
-
+           
+        
         if modified_since is not None:
             matching_files = [
                 f for f in matching_files if f["last_modified"] > modified_since]
@@ -302,8 +303,8 @@ class FTPSConnection:
             result = []
             def parse_list(line):
                 ret = line.split()
-                filename= ret[3]
-                fact = {"size": ret[3],
+                filename = line[line.find(ret[3]):]
+                fact = {"size": ret[2],
                         "modify": dateutil.parser.parse(f"{ret[0]} {ret[1]}").replace(tzinfo=pytz.UTC)}
                 result.append((filename,fact)) 
 
@@ -391,6 +392,10 @@ class FTPSConnection:
 
     def get_files_matching_pattern(self, files, pattern):
         """ Takes a file dict {"filepath": "...", "last_modified": "..."} and a regex pattern string, and returns files matching that pattern. """
+
+        for f in files:
+            LOGGER.info(f['filepath'])
+
         matcher = re.compile(pattern)
         return [f for f in files if matcher.search(f["filepath"])]
 
